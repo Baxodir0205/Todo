@@ -53,12 +53,18 @@
 <body>
 	<div class="container">
 		<h1>Login Page</h1>
+		{% if messages %}
+		    {% for message in messages %}
+		        <p style="text-align: center; color: orange">{{ message }} </p>
+		    {% endfor %}
+		{% endif %}
 		<form method="post" action="/">
 			<label for="username">Username:</label>
 			<input type="text" name="username" id="username" placeholder="Enter username ...">
 			<label for="password">Password:</label>
 			<input type="password" name="password" id="password" placeholder="Enter password ...">
 			<button>Login</button>
+				<a href="{% url 'register' %}">Register</a>
 		</form>
 	</div>
 </body>

@@ -1,25 +1,28 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
   <head>
     <title>Edit Task</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
   </head>
   <body>
     <div class="container">
       <h1>Edit Task</h1>
-      <form>
+      <form method="post">
+        {% csrf_token %}
         <div class="form-group">
-          <label for="task-name">Task Name</label>
-          <input type="text" id="task-name" placeholder="Enter task name...">
-          <label for="task-details">Task Detail</label>
-          <input type="text" id="task-details" placeholder="Enter task details...">
+          <label for="task-name">Title</label>
+          <input style="margin-button: 20px; " type="text" name="title" id="task-name" value="{{ task.title }}"
+                 placeholder="Enter title..." required>
+          <label for="task-details">Details</label>
+          <input type="text" name="details" id="task-details" value="{{ task.details }}" placeholder="Enter details...">
         </div>
         <div class="form-group">
           <label for="status">Status</label>
-          <select id="status">
-            <option>Not started</option>
-            <option>In Progress</option>
-            <option>Completed</option>
+          <select id="status" name="status">
+          {% for status in statuses %}
+            <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>
+          {% endfor %}
           </select>
         </div>
         <button type="submit" class="btn">Save</button>
@@ -27,4 +30,4 @@
       </form>
     </div>
   </body>
-</html> 
+</html>

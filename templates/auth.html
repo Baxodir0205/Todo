@@ -175,13 +175,12 @@
         <button class="tab-btn" onclick="showForm('register')">Register</button>
     </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="text-align: center; color: red">
-                {{ message }}
-            </p>
-        {% endfor %}
-    {% endif %}
+
+    	{% if messages %}
+		    {% for message in messages %}
+		        <p style="text-align: center; color: orange">{{ message }} </p>
+		    {% endfor %}
+		{% endif %}
 
     <!-- LOGIN FORM -->
     <form class="form active" id="login" method="post" action="{% url 'login' %}">
@@ -199,9 +198,6 @@
             <input type="password" name="password" placeholder="Parol kiriting" required/>
         </div>
 
-        <div class="forgot">
-            <a href="">Parolni unutdingizmi?</a>
-        </div>
 
         <button type="submit" class="btn">Kirish</button>
 

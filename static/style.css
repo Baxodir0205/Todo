@@ -1,109 +1,113 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
-  }
-  
-  .container {
+}
+
+.container {
     max-width: 600px;
     margin: 10vh auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .head {
+}
+
+.head {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  h1 {
+h1 {
     text-align: center;
     color: rgb(3, 149, 139);
-  }
+}
 
-  h3 {
+h3 {
     margin-right: 30px;
-  }
+}
 
-  a {
+a {
     text-decoration: none;
     color: white;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  .form1 {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-  }
+}
 
-  input[type="text"] {
+form {
+    margin-bottom: 20px;
+}
+
+.form1 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+/* Umumiy text input */
+input[type="text"] {
     flex: 1;
-    width: 432px;
+    min-width: 0;       /* flex ichida kengaymaydi */
     padding: 10px;
     border: none;
     border-radius: 10px;
     background-color: #f5f5f5;
-    margin: 0px 30px 0px 0px
-  }
+}
 
-  input[type="date"] {
+input[type="date"] {
     border-radius: 10px;
     border: 0;
     padding: 7px;
-    margin-right: 32px;
     color: darkgreen;
-  }
+    background-color: #f5f5f5;
+    flex-shrink: 0;
+}
 
-  .task input {
-    margin-right: 5px;
-  }
+select {
+    cursor: pointer;
+    border: 0;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    padding: 8px 5px;
+    flex-shrink: 0;
+}
 
-  .task input[type="text"] {
-    width: 70px; 
+/* Task ichidagi kichik inputlar */
+.task input[type="text"] {
+    width: 80px;
+    min-width: 0;
+    flex: none;
     background-color: white;
     color: darkgreen;
     padding: 7px;
-  }
+    margin-right: 5px;
+}
 
-  select {
-    cursor: pointer;
-    border: 0px;
-    border-radius: 10px;
-    background-color: #f5f5f5;
-    padding: 5px;
-  }
-
-  .opt {
+.opt {
     color: #807d7d;
     background-color: white;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: rgb(37, 37, 252);
     color: #fff;
     cursor: pointer;
-  }
-  
-  button:hover {
+    flex-shrink: 0;
+}
+
+button:hover {
     background-color: rgb(2, 2, 174);
-  }
-  
-  ul {
+}
+
+ul {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  li {
+}
+
+li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -112,63 +116,59 @@ body {
     margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  li:hover {
+}
+
+li:hover {
     background-color: #e5e5e5;
-  }
-  
-  .delete {
+}
+
+.delete {
     background-color: #f44336;
     color: #fff;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  
-  .delete:hover {
+}
+
+.delete:hover {
     background-color: #cc0000;
-  }
+}
 
-
-  .edit {
+.edit {
     background-color: orange;
     color: #fff;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  
-  .edit:hover {
-    background-color: rgb(222, 145, 3);
-  }
-  
+}
 
-  .details {
-    margin: 0px 0px 5px 30px;
+.edit:hover {
+    background-color: rgb(222, 145, 3);
+}
+
+.details {
+    margin: 0 0 5px 10px;
     background-color: #f5f5f5;
     padding: 7px 20px;
     border-radius: 10px;
     text-align: justify;
-  }
+}
 
-  .task {
+.task {
     border: 2px solid green;
     background-color: lightgreen;
     border-radius: 10px;
     padding: 7px;
     margin: 10px 0;
     color: darkgreen;
-  }
+}
 
-  .task-add {
+.task-add {
     background-color: lightblue;
     border-radius: 10px;
-    padding: 7px;
+    padding: 10px;
     margin: 5px 0;
     border: 2px solid blue;
-  }
+}

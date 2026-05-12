@@ -1,81 +1,81 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
   <head>
     <title>To-Do List</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
   </head>
   <body>
     <div class="container">
-        <div class="head">
-            <h1>To-Do List</h1>
-            <div style="display: flex; align-items: center;">
-                <h3>User</h3>
-                <a href="./login.html" style="text-decoration: none; color: red;">
-                Log out
-                </a>
-            </div>
+
+      <div class="head">
+        <h1>To-Do List</h1>
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <a href="{% url 'my-account' %}" style="color: darkslategrey; text-decoration: none;">
+            <h3 style="margin: 0;">
+              {% if request.user.get_full_name %}
+                {{ request.user.get_full_name }}
+              {% else %}
+                {{ request.user.username }}
+              {% endif %}
+            </h3>
+          </a>
+          <a href="{% url 'logout' %}" style="text-decoration: none; color: red;">
+            Log out
+          </a>
+        </div>
       </div>
 
       <div class="task-add">
         <form id="task-form" method="post">
-            <div class="form1">
-              <input type="text" name="name" placeholder="Add Task...">
-              <input type="date" name="date">
-              <select name="status">
-                <option class="opt">
-                  Not started
-                </option>
-                <option class="opt">
-                  In progress
-                </option>
-                <option class="opt">
-                  Completed
-                </option>
-              </select>
-            </div>
-            <div class="fomr1">
-              <input type="text" name="details" placeholder="Details ...">
-              <button type="submit" class="btn">Add Task</button>
-            </div>
-          </form>
+          {% csrf_token %}
+          <div class="form1">
+            <input type="text" name="title" placeholder="Task Title..." required>
+            <input type="date" name="deadline">
+            <select name="status">
+              {% for status in statuses %}
+                <option class="opt" value="{{ status }}">{{ status }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form1">
+            <input type="text" name="details" placeholder="Details ...">
+            <button type="submit" class="btn">Add Task</button>
+          </div>
+        </form>
       </div>
-      <hr style="margin: 10px 5px;">
+
+      <hr style="margin: 10px 0;">
+
+      {% for task in tasks %}
       <div class="task">
         <ul id="task-list">
           <li>
-              <div>
-                  Task-name
-              </div>
-              <div>
-                    <input type="text" value="Completed" readonly >
-                    <input type="date" value="2023-03-06" readonly>
-                    <button type="submit" class="edit"><a href="./edit.html">Edit</a></button>
-                    <button type="submit" class="delete"><a href="./edit.html">Delete</a></button>
-              </div>
+            <div>{{ task.title }}</div>
+            <div>
+              <input type="text" value="{{ task.status }}" readonly>
+              {% if task.deadline %}
+                <input type="date" value="{{ task.deadline|date:'Y-m-d' }}" readonly>
+              {% endif %}
+              <button class="edit">
+                <a href="{% url 'task-update' task.id %}">Edit</a>
+              </button>
+              <button class="delete">
+                <a href="{% url 'task-delete' task.id %}">Delete</a>
+              </button>
+            </div>
           </li>
         </ul>
-        <ul class="details"> 
-            Task-Details: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, eaque?
+        {% if task.details %}
+        <ul class="details">
+          {{ task.details }}
         </ul>
+        {% endif %}
       </div>
-      <div class="task">
-        <ul id="task-list">
-          <li>
-              <div>
-                  Task-name
-              </div>
-              <div>
-                    <input type="text" value="In progress" readonly>
-                    <input type="date" value="2023-03-06" readonly>
-                    <button type="submit" class="edit"><a href="./edit.html">Edit</a></button>
-                    <button type="submit" class="delete"><a href="./edit.html">Delete</a></button>
-              </div>
-          </li>
-        </ul>
-        <ul class="details"> 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime molestiae molestias explicabo recusandae a perspiciatis beatae dolorem vitae. Reprehenderit, numquam? 
-        </ul>
-      </div>
+      {% empty %}
+      <p style="text-align: center; color: gray; margin-top: 20px;">Hozircha tasklar yo'q!</p>
+      {% endfor %}
+
     </div>
   </body>
 </html>

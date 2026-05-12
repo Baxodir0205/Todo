@@ -159,38 +159,39 @@
       </button>
     </div>
 
-    <form>
-
+    <form> method="post" action="{% url 'update-account' %}">
+    {% csrf_token %}
       <div class="form-grid">
 
         <div class="input-box">
           <label>Ism</label>
-          <input type="text" value="Otabek" disabled>
+          <input type="text" name="fist_name" value="{% if request.user.first_name %}{{ request.user.first_name }}{% endif %}" required>
+
         </div>
 
         <div class="input-box">
           <label>Familiya</label>
-          <input type="text" value="Tursunov" disabled>
+          <input type="text" name="last_name" value="{% if request.user.last_name %}{{ request.user.last_name }}{% endif %}">
         </div>
 
         <div class="input-box">
           <label>Username</label>
-          <input type="text" value="otabekdev" disabled>
+          <input type="text" name="username" value="{{ request.user.username }}" required >
         </div>
 
         <div class="input-box">
           <label>Email</label>
-          <input type="email" value="otabek@gmail.com" disabled>
+          <input type="email" name="email" value="{% if request.user.email_name %}{{ request.user.email_name }}{% endif %}" disabled>
         </div>
 
         <div class="input-box">
-          <label>Password</label>
-          <input type="password" value="12345678" disabled>
+          <label>New Password</label>
+          <input type="password" name="password">
         </div>
 
         <div class="input-box">
           <label>Qo'shilgan sana</label>
-          <input type="text" value="07 May 2026" disabled>
+          <input type="text" value="{{ request.user.date.joined|date:'d.m.Y' }}" >
         </div>
 
       </div>
@@ -200,7 +201,7 @@
           Cancel
         </button>
 
-        <button type="button" class="save-btn" onclick="saveProfile()">
+        <button type="submit" class="save-btn">
           Save
         </button>
       </div>
@@ -231,15 +232,7 @@
       actions.classList.remove("active");
     }
 
-    function saveProfile(){
-      inputs.forEach(input => {
-        input.disabled = true;
-      });
 
-      actions.classList.remove("active");
-
-      alert("Profile updated!");
-    }
   </script>
 
 </body>
